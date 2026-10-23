@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand fw-bold" th:href="@{/}">
+            🏋️ <span class="text-warning" th:text="${gymName}">Shanmukh's Gym</span>
+        </a>
+
+        <div class="navbar-nav me-auto ms-4">
+            <a class="nav-link" th:href="@{/}">Home</a>
+            <a class="nav-link" th:if="${isAdmin}" th:href="@{/plans}">Plans</a>
+            <a class="nav-link" th:href="@{/members}">Members</a>
+            <a class="nav-link" th:href="@{/enrollments}">Enrollments</a>
+        </div>
+
+        <div class="d-flex align-items-center" th:if="${currentUserName != null}">
+            <span class="text-light small me-3">
+                <strong th:text="${currentUserName}">admin</strong>
+                <span class="badge ms-1 text-dark"
+                      th:classappend="${isAdmin} ? 'bg-warning' : 'bg-info'"
+                      th:text="${isAdmin} ? 'Admin' : 'Staff'">Admin</span>
+            </span>
+            <form th:action="@{/logout}" method="post" class="mb-0">
+                <button type="submit" class="btn btn-sm btn-outline-light">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>
